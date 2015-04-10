@@ -5,11 +5,61 @@
 
 ;(function(window){
 	
-	var properties = {
+	var elements = {
 		chat: {
-			height: 400
+			expandHeight: '400px',
+			styles: {
+				height: '0px',
+				'background-color': '#69d8a6',
+				border: '1px solid black',
+				transition: 'height 0.3s',
+				overflow: 'hidden'
+			}
+		},
+		talkBox: {
+			description: 'The most outer container',
+			expandWidth: '350px',
+			styles: {
+				position: 'fixed',
+				bottom: '0px',
+				right: '2px',
+				width: '250px',
+				'z-index': '100000',
+				transition: 'width 0.3s'
+			}
+		},
+		header: {
+			styles: {
+				'border-radius': '5px 5px 0 0',
+				height: '25px',
+				'background-color': '#69d8a6',
+				'border-color': '#2fac74',
+				color: 'black',
+				'font-weight': '900',
+				'text-align': 'center',
+				'font-family': 'Arial',
+				cursor: 'pointer',
+				border: '1px solid black'
+			}
+		},
+		typeHere: {
+			styles: {
+				position: 'absolute',
+				bottom: '1px',
+				resize: 'none',
+				'border-radius': '4px;',
+				resize: 'none',
+				padding: '5px',
+				width: '320px',
+				'box-shadow': 'none',
+				border: '1px solid black',
+				height: '50px',
+				margin: '8px'
+			}
 		}
 	}
+
+
 
 	if (window.document.body) {
 		talkCentral();
@@ -21,33 +71,16 @@
 
 		//Build HTML
 		var talkBox = document.createElement('div');
-		talkBox.style.cssText = " position: fixed; \
-				bottom: 0px; \
-				right: 2px; \
-				width: 250px; \
-				z-index: 100000";
+		applyStyles(talkBox, elements.talkBox.styles);
 
 		var header = document.createElement('div');
 		header.innerHTML = "Chat Now";
-		header.style.cssText = "border-radius: 5px 5px 0 0; \
-				height: 25px; \
-				background-color: #69d8a6; \
-				border-color: #2fac74; \
-				color: black; \
-				font-weight: 900; \
-				text-align: center; \
-				font-family: Arial; \
-				cursor: pointer; \
-				border: 1px solid black;";	
+		applyStyles(header, elements.header.styles);
 
 		talkBox.appendChild(header);
 
 		var chat = document.createElement('div');
-		chat.style.cssText = "height: 0; \
-				background-color: #69d8a6; \
-				border: 1px solid black; \
-				transition: height 0.3s; \
-				overflow: hidden;"
+		applyStyles(chat, elements.chat.styles);
 
 		talkBox.appendChild(chat);
 
@@ -58,22 +91,14 @@
 
 
 		var typeHere = document.createElement('textarea');
-		typeHere.style.cssText = "position: absolute; \
-				bottom: 1px; \
-				resize: none; \
-				border-radius: 4px; \
-				resize: none; \
-				padding: 5px; \
-				margin: 10px; \
-				width: 200px; \
-				box-shadow: none; \
-				border: 1px solid black;"
-
+		applyStyles(typeHere, elements.typeHere.styles);
+		
 		insideChat.appendChild(typeHere)
 
 		//Add event handlers
 		header.addEventListener("click", function(){
-			chat.style.height = chat.style.height !== "0px" ? 0 : properties.chat.height + "px";
+			chat.style.height = chat.style.height !== "0px" ? 0 : elements.chat.expandHeight;
+			talkBox.style.width = talkBox.style.width === "250px" ? elements.talkBox.expandWidth : elements.talkBox.styles.width;
 		});	
 
 		window.document.body.appendChild(talkBox);
@@ -106,6 +131,15 @@
 		}
 	}
 
-	socket();
+	
+	function applyStyles(element, style){
+		var styleStr = "";
+		for (var i in style){
+			if (style.hasOwnProperty(i)){
+				styleStr += i + ": " + style[i] + "; ";
+			}
+		}
+		element.style.cssText = styleStr;
+	}
 
 })(window);
