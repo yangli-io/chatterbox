@@ -132,10 +132,10 @@
 	}
 
 
-	//Websocket API
+	//sets up web socket API
 	function socket(){
 		if (window.WebSocket) {
-			var ws = new WebSocket("wss://s-dal5-nss-25.firebaseio.com/.ws?v=5&ns=videoshare");
+			var ws = new WebSocket("ws://localhost:8080");
 			ws.onopen = function()
 		     {
 		        // Web Socket is connected, send data using send()
@@ -143,22 +143,29 @@
 		        alert("Message is sent...");
 		     };
 
-		    ws.onmessage = function (evt) 
-		     { 
+		    ws.onmessage = function (evt)
+		     {
 		        console.log(evt);
 		        alert("Message is received...");
 		     };
 		     ws.onclose = function()
-		     { 
+		     {
 		        // websocket is closed.
-		        alert("Connection is closed..."); 
+		        alert("Connection is closed...");
 		     };
 		} else {
-			//Long polling
+			//TODO - Long polling if browser does not have a websocket
 		}
 	}
 
-	
+  socket();
+
+  /*
+   * applies a set of styles stored in a JSON to element
+   *
+   * @parameter {object} element
+   * @parameter {object} style
+   */
 	function applyStyles(element, style){
 		var styleStr = "";
 		for (var i in style){

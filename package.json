@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/yangli1990/chatterbox",
   "dependencies": {
-    "websocket": "^1.0.18"
+    "ws": "^0.7.1"
   }
 }
