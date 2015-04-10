@@ -5,6 +5,11 @@
 
 ;(function(window){
 	
+	var userConfig = {
+		boxWidth: '350',
+		boxColor: '#69d8a6'
+	}
+
 	var elements = {
 		chat: {
 			expandHeight: '400px',
@@ -18,11 +23,11 @@
 		},
 		talkBox: {
 			description: 'The most outer container',
-			expandWidth: '350px',
+			expandWidth: userConfig.boxWidth + "px",
 			styles: {
 				position: 'fixed',
 				bottom: '0px',
-				right: '2px',
+				right: '4px',
 				width: '250px',
 				'z-index': '100000',
 				transition: 'width 0.3s'
@@ -33,12 +38,13 @@
 			styles: {
 				'border-radius': '5px 5px 0 0',
 				height: '0px',
-				'background-color': '#69d8a6',
+				'background-color': userConfig.boxColor,
 				'border-color': '#2fac74',
 				color: 'black',
 				'font-weight': '900',
 				'text-align': 'center',
 				'font-family': 'Arial',
+				'padding-top': '5px',
 				cursor: 'pointer',
 				border: '1px solid black',
 				transition: 'height 0.5s cubic-bezier(.75,2.5,.67,-0.3)'
@@ -52,11 +58,16 @@
 				'border-radius': '4px;',
 				resize: 'none',
 				padding: '5px',
-				width: '320px',
+				width: ( userConfig.boxWidth - 29 )+ "px",
 				'box-shadow': 'none',
 				border: '1px solid black',
 				height: '50px',
 				margin: '8px'
+			}
+		},
+		messages: {
+			styles: {
+
 			}
 		}
 	}
@@ -76,7 +87,7 @@
 		applyStyles(talkBox, elements.talkBox.styles);
 
 		var header = document.createElement('div');
-		header.innerHTML = "Chat Now";
+		header.innerHTML = "ChatterBox&#8482;";
 		applyStyles(header, elements.header.styles);
 
 		talkBox.appendChild(header);
@@ -109,6 +120,9 @@
 				},300);
 			}
 		});	
+
+		var messages = document.createElement('div');
+
 
 		setTimeout(function(){
 			header.style.height = elements.header.expandHeight;

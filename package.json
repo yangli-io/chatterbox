@@ -1,0 +1,26 @@
+{
+  "name": "chatterbox",
+  "version": "0.0.0",
+  "description": "An open source chat tool",
+  "main": "chatterbox.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yangli1990/chatterbox.git"
+  },
+  "keywords": [
+    "chat",
+    "business"
+  ],
+  "author": "Yang Li",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yangli1990/chatterbox/issues"
+  },
+  "homepage": "https://github.com/yangli1990/chatterbox",
+  "dependencies": {
+    "websocket": "^1.0.18"
+  }
+}
