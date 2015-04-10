@@ -29,9 +29,10 @@
 			}
 		},
 		header: {
+			expandHeight: '25px',
 			styles: {
 				'border-radius': '5px 5px 0 0',
-				height: '25px',
+				height: '0px',
 				'background-color': '#69d8a6',
 				'border-color': '#2fac74',
 				color: 'black',
@@ -39,7 +40,8 @@
 				'text-align': 'center',
 				'font-family': 'Arial',
 				cursor: 'pointer',
-				border: '1px solid black'
+				border: '1px solid black',
+				transition: 'height 0.5s cubic-bezier(.75,2.5,.67,-0.3)'
 			}
 		},
 		typeHere: {
@@ -92,14 +94,25 @@
 
 		var typeHere = document.createElement('textarea');
 		applyStyles(typeHere, elements.typeHere.styles);
-		
+
 		insideChat.appendChild(typeHere)
 
 		//Add event handlers
 		header.addEventListener("click", function(){
 			chat.style.height = chat.style.height !== "0px" ? 0 : elements.chat.expandHeight;
 			talkBox.style.width = talkBox.style.width === "250px" ? elements.talkBox.expandWidth : elements.talkBox.styles.width;
+
+			if (chat.style.height === "0px"){
+				header.style.height = "0px";
+				setTimeout(function(){
+					header.style.height = elements.header.expandHeight;
+				},300);
+			}
 		});	
+
+		setTimeout(function(){
+			header.style.height = elements.header.expandHeight;
+		},0);
 
 		window.document.body.appendChild(talkBox);
 	}
